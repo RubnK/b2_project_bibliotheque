@@ -12,15 +12,9 @@ class Favoris{
         $this->pdo = $db->pdo;
     }
 
-    public function getFavoris($id_user){
+    public function getFavoris(){
         $stmt = $this->pdo->prepare("SELECT * FROM favoris WHERE utilisateur_id = :id");
-        $stmt->execute(['id' => $id_user]);
-        return $stmt->fetchAll();
-    }
-
-    public function getFavorisByUser($id_user){
-        $stmt = $this->pdo->prepare("SELECT * FROM favoris WHERE utilisateur_id = :id_user");
-        $stmt->execute(['id_user' => $id_user]);
+        $stmt->execute(['id' => $_SESSION['user']['id']]);
         return $stmt->fetchAll();
     }
 

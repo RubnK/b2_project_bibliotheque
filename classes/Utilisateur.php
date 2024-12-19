@@ -49,6 +49,7 @@ class Utilisateur{
         $password = hash('sha512', $password);
         $stmt = $this->pdo->prepare("UPDATE utilisateurs SET nom = ?, email = ?, password = ? WHERE id = ?");
         return $stmt->execute([$username, $email, $password, $id]);
+        echo $password;
     }
 
     public function deleteUser($id){

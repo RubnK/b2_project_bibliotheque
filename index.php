@@ -1,12 +1,14 @@
 <?php 
 session_start();
 include_once 'classes/Livre.php';
+include_once 'classes/Favoris.php';
 
-$livre = new Livre();
+$livreModel = new Livre();
+$favorisModel = new Favoris();
 if(isset($_GET['search'])){
-    $livres = $livre->getLivres($_GET['search']);
+    $livres = $livreModel->getLivres($_GET['search']);
 } else {
-    $livres = $livre->getLivres();
+    $livres = $livreModel->getLivres();
 }
 
 $livresParPage = 3;
@@ -16,6 +18,7 @@ $indexDebut = ($pageActuelle - 1) * $livresParPage;
 
 $livres = array_slice($livres, $indexDebut, $livresParPage);
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +48,11 @@ $livres = array_slice($livres, $indexDebut, $livresParPage);
             <li>
                 <h2><?= $livre['titre'] ?></h2>
                 <p><?= $livre['auteur'] ?></p>
-                <a href="addFavori.php?id=<?= $livre['id'] ?>">Ajouter aux favoris</a>
+                <?php if (in_array($livre['id'], array_column($favorisModel->getFavoris(), 'livre_id'))): ?>
+                    <p style="color: green;">Déjà en favoris</p>
+                <?php else: ?>
+                    <a href="addFavori.php?id=<?= $livre['id'] ?>">Ajouter aux favoris</a>
+                <?php endif; ?>
             </li>
         <?php endforeach; ?>
     </ul>

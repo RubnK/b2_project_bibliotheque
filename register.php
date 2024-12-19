@@ -29,7 +29,7 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
             $error = 'Erreur lors de l\'inscription.';
         }
     }
-} else {
+} else if ($_SERVER['REQUEST_METHOD']=='POST') {
     $error = 'Veuillez remplir tous les champs.';
 }
 
@@ -51,7 +51,7 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
         <label for="username">Nom d'utilisateur</label>
         <input type="text" name="username" id="username" <?php if(isset($_POST['username'])){echo "value=".$_POST['username'];} ?> required><br>
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" <?php if(isset($_POST['email'])){echo "value=".$_POST['username'];} ?> required><br>
+        <input type="text" name="email" id="email" <?php if(isset($_POST['email'])){echo "value=".$_POST['email'];} ?> required><br>
         <label for="password">Mot de passe</label>
         <input type="password" name="password" id="password" required><br>
         <label for="password2">Confirmer le mot de passe</label>
