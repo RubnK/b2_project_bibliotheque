@@ -2,8 +2,8 @@
 
 class Database {
     private $servername = "localhost";
-    private $username = "root";
-    private $password = "";
+    private $username = "username";
+    private $password = "password";
     private $dbname = "bibliotheque";
     private $charset = "utf8mb4";
     public $pdo;

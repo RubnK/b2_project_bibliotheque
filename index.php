@@ -48,7 +48,7 @@ $livres = array_slice($livres, $indexDebut, $livresParPage);
             <li>
                 <h2><?= $livre['titre'] ?></h2>
                 <p><?= $livre['auteur'] ?></p>
-                <?php if (in_array($livre['id'], array_column($favorisModel->getFavoris(), 'livre_id'))): ?>
+                <?php if (isset($_SESSION['user']) && in_array($livre['id'], array_column($favorisModel->getFavoris(), 'livre_id'))): ?>
                     <p style="color: green;">Déjà en favoris</p>
                 <?php else: ?>
                     <a href="addFavori.php?id=<?= $livre['id'] ?>">Ajouter aux favoris</a>

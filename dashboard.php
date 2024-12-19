@@ -63,7 +63,7 @@ if (isset($_POST['titre']) && isset($_POST['auteur']) && $_SESSION['user']) {
     <h2 style="cursor: pointer;" onclick="showHide('favoris')">Mes favoris ></h2>
     <div id="favoris" style="display: none;">
         <?php if(empty($favorisModel->getFavoris($_SESSION['user']['id']))): ?>
-            <p><i>Aucun favori disponible.</i></p>
+            <p><i>Aucun livre en favori.</i></p>
         <?php else: ?>
         <p>J'ai <?= count($favorisModel->getFavoris()) ?> livres en favoris.</p>
         <ul>
