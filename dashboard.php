@@ -41,6 +41,11 @@ if(isset($_GET['search'])){
     $livres = $livreModel->getLivres();
 }
 
+if (isset($_POST['titre']) && isset($_POST['auteur']) && $_SESSION['user']) {
+    $livreModel->addLivre($_POST['titre'], $_POST['auteur']);
+    $bookSuccess = 'Livre ajouté avec succès.';
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -74,13 +79,16 @@ if(isset($_GET['search'])){
     </div>
     <h2 style="cursor: pointer;" onclick="showHide('addBook')">Ajouter un livre ></h2>
     <div id="addBook" style="display: none;">
-        <form action="addBook.php" method="post">
+        <form action="dashboard.php" method="post">
             <label for="titre">Titre</label>
             <input type="text" name="titre" id="titre" required><br>
             <label for="auteur">Auteur</label>
             <input type="text" name="auteur" id="auteur" required><br>
             <button type="submit">Ajouter</button>
         </form>
+        <?php if (isset($bookSuccess)): ?>
+            <p style="color: green;"><?= $bookSuccess ?></p>
+        <?php endif; ?>
     </div>
     <h2 style="cursor: pointer;" onclick="showHide('availableBooks')">Tous les livres disponibles ></h2>
     <div id="availableBooks" style="display: none;">
