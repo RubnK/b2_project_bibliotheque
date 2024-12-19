@@ -1,12 +1,14 @@
 <?php
 session_start();
 include_once 'classes/Favoris.php';
+$favorisModel = new Favoris();
+
 if (!isset($_SESSION['user'])) {
     header('Location: login.php?error=1');
     exit();
 }
 
-if (in_array($livre['id'], array_column($favorisModel->getFavoris(), 'livre_id'))){
+if (in_array($_GET['id'], array_column($favorisModel->getFavoris(), 'livre_id'))){
     header('Location: dashboard.php');
     exit();
 }
